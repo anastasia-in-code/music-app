@@ -12,9 +12,11 @@ export const shazamCoreAPI = createApi({
   }),
   endpoints: (builder) => ({
     getTopCharts: builder.query({ query: () => '/charts/get-top-songs-in_world_by_genre?genre=pop' }),
+    getSongDetails: builder.query({ query: ({ songid }) => `/songs/get_details?id=${songid}'` }),
   }),
 });
 
 export const {
   useGetTopChartsQuery,
+  useGetSongDetailsQuery
 } = shazamCoreAPI;
