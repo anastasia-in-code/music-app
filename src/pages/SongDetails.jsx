@@ -699,9 +699,6 @@ const SongDetails = () => {
     dispatch(playPause(true));
   };
 
-  console.log(relatedSongs.tracks);
-
-  //   console.log(songData);
   return (
     <div className="flex flex-col">
       <DetailsHeader artistId="" songData={songData} />
