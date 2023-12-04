@@ -4,7 +4,6 @@ import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
 
 const SongCard = ({ song, isPlaying, activeSong, musicData, idx }) => {
-  console.log(song);
   const dispatch = useDispatch();
 
   const handlePauseClick = () => {
@@ -55,19 +54,3 @@ const SongCard = ({ song, isPlaying, activeSong, musicData, idx }) => {
 };
 
 export default SongCard;
-
-// {
-//   apple_music_url: 'https://music.apple.com/gb/album/surround-sound-feat-21-savage-baby-tate/1637738689',
-//   artist_id: '42',
-//   key: 599925144,
-//   photo_url: null,
-//   ringtone: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/de/e9/7e/dee97e4d-ca95-fe00-cfa4-51f71fc5bef3/mzaf_16387331817857477766.plus.aac.ep.m4a',
-//   sections: null,
-//   shazam_url: 'https://www.shazam.com/track/42',
-//   spotify_uri: null,
-//   spotify_uri_query: null,
-//   spotify_url: null,
-//   subtitle: 'JID',
-//   title: 'Surround Sound (feat. 21 Savage & Baby Tate)',
-//   youtube_link: null,
-// },
