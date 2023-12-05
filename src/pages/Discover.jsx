@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader, SongCard } from '../components';
-import { genres } from '../assets/constants';
+import { genres } from '../constants';
 import { selectGenreListId } from '../redux/features/playerSlice';
-import api from '../../fakeAPI';
+import api from '../fakeAPI';
 
 const Discover = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Discover = () => {
 
   useEffect(() => {
     const getSongs = async () => {
-      const result = await api.getbyGenre(genres.find((genre) => genre.title == (genreListId || 'Pop'))?.value);
+      const result = await api.getbyGenre(genres.find((genre) => genre.title === (genreListId || 'Pop'))?.value);
       setSongs(result);
       setIsLoading(false);
     };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import api from '../../fakeAPI';
+import api from '../fakeAPI';
 
 import { Loader, ArtistCard } from '../components';
 

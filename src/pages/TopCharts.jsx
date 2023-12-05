@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import api from '../../fakeAPI';
+import api from '../fakeAPI';
 
 import { Loader, SongCard } from '../components';
 

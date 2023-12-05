@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import api from '../../fakeAPI';
+import api from '../fakeAPI';
 
 import { Loader, SongCard } from '../components';
 

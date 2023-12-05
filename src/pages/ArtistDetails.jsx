@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
-import api from '../../fakeAPI';
+import { DetailsHeader, RelatedSongs } from '../components';
+import api from '../fakeAPI';
 
 const ArtistDetails = () => {
   const { id } = useParams();

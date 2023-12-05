@@ -1,15 +1,17 @@
+/* eslint-disable import/no-unresolved */
+
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
 
-import PlayPause from './PlayPause';
-import { playPause, setActiveSong } from '../redux/features/playerSlice';
-import api from '../../fakeAPI';
-
 import 'swiper/css';
 import 'swiper/css/free-mode';
+
+import PlayPause from './PlayPause';
+import { playPause, setActiveSong } from '../redux/features/playerSlice';
+import api from '../fakeAPI';
 
 const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handlePlayClick }) => (
   <div className="w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
@@ -90,7 +92,7 @@ const TopPlay = () => {
 
           </div>
           <Swiper slidesPerView="auto" spaceBetween={15} freeMode centeredSlides centeredSlidesBounds modules={[FreeMode]} className="mt-4">
-            {topPlays?.map((song, i) => (
+            {topPlays?.map((song) => (
               <SwiperSlide key={song?.key} style={{ width: '25%', height: 'auto' }} className="shadow-lg rounded-full animate-slider">
                 <Link to={`/artists/${song?.artists[0]?.adamid}`}>
                   <img src={song?.images.background} alt="name" className="rounded-full w-full object-cover" />
