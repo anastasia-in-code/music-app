@@ -3,9 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import api from '../../fakeAPI';
 
-import { Error, Loader, SongCard } from '../components';
-
-import { useGetCountryChartQuery } from '../redux/services/shazamCore';
+import { Loader, SongCard } from '../components';
 
 const AroundYou = () => {
   const [country, setCountry] = useState('');

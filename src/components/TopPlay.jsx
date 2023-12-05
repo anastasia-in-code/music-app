@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,7 +6,7 @@ import { FreeMode } from 'swiper';
 
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
-import { useGetTopChartsQuery } from '../redux/services/shazamCore';
+import api from '../../fakeAPI';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -32,152 +32,19 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handle
 const TopPlay = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  // const { data } = useGetTopChartsQuery();
-  // console.log(data)
-  const data = { tracks: [{
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '67503214499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRaes',
-    title: 'text',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '675033153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '6750e33153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '67503s3153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '675s033153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '67s5033153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }, {
-    artists: [{ adamid: '548421',
-      alias: 'wham',
-      id: '42' }],
-    highlightsurls: null,
-    hub: null,
-    images: {
-      background: 'https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages126/v4/5e/79/cd/5e79cd67-d483-52ef-3270-8dca1f390616/d15092ad-9322-4af8-b80f-0159d6409689_ami-identity-11b6c33ddb521791b7ba1dd8c4dcf764-2023-11-17T01-24-42.921Z_cropped.png/800x800cc.jpg',
-      coverart: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      coverarthq: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1b/9a/d3/1b9ad377-0346-7c99-bbdd-6dbbaf0d1107/196871542654.jpg/400x400cc.jpg',
-      joecolor: 'b:222423p:f1f0f6s:e49783t:c7c7ccq:bd8070',
-    },
-    key: '675f033153499',
-    layout: '5',
-    properties: null,
-    share: null,
-    subtitle: 'Tate McRdae',
-    title: 'greedy',
-    type: 'MUSIC',
-    url: 'https://www.shazam.com/track/675031499/greedy',
-  }] };
+  const [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    const getArtists = async () => {
+      const result = await api.getAll();
+      setSongs(result);
+    };
+    getArtists();
+  }, []);
+
   const divRef = useRef(null);
 
-  const topPlays = data?.tracks?.slice(0, 5);
+  const topPlays = songs.slice(0, 5);
 
   useEffect(() => {
     divRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -187,7 +54,7 @@ const TopPlay = () => {
     dispatch(playPause(false));
   };
   const handlePlayClick = (song, i) => {
-    dispatch(setActiveSong({ song, data, i }));
+    dispatch(setActiveSong({ song, topPlays, i }));
     dispatch(playPause(true));
   };
 

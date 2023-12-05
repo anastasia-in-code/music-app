@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
-
-import { useGetArtistDetailsQuery, useGetArtistSongsQuery } from '../redux/services/shazamCore';
+import api from '../../fakeAPI';
 
 const ArtistDetails = () => {
   const { id } = useParams();
 
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  // const {data:artistData, isLoading, isError} = useGetArtistDetailsQuery({artistId: id})
+
   const artistData = [
     {
       attributes: {
@@ -168,7 +167,6 @@ const ArtistDetails = () => {
     },
   ];
 
-  // const { data: songsData, isLoading } = useGetArtistSongsQuery({ artistId: id });
   const songsData = {
     data: [
       {
@@ -732,12 +730,11 @@ const ArtistDetails = () => {
     next: '/v1/catalog/es/artists/320569549/view/top-songs?offset=10',
   };
 
-  // if (isLoading) return <Loader title="Loading artist details" />;
-  // if (isError) return <Error />;
+  const mockArtist = api.getArtist(id);
 
   return (
     <div className="flex flex-col">
-      <DetailsHeader artistId={id} artistData={artistData[0]} />
+      <DetailsHeader mockArtist={mockArtist} artistId={id} artistData={artistData[0]} />
 
       <RelatedSongs data={songsData.data} isPlaying={isPlaying} activeSong={activeSong} artistId={id} />
     </div>
